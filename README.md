@@ -1,15 +1,5 @@
-# Plant-Disease-Prediction
+The Plant Disease Detection system with AI-integrated Chatbot is an intelligent solution designed to assist farmers and agricultural experts in identifying and managing plant health issues effectively. It uses advanced deep learning algorithms, particularly Convolutional Neural Networks (CNNs), to analyze plant leaf images and accurately detect diseases at an early stage. Once a disease is detected, the system provides detailed information about the disease, its symptoms, and suitable treatment methods or preventive measures.
 
-Upload the affected leaf of your plant 📷
+The AI chatbot integrated into the system enhances user interaction by providing real-time assistance and personalized recommendations. Users can simply upload an image or describe symptoms, and the chatbot responds instantly with guidance, eliminating the need for manual diagnosis or expert consultation. It can also answer general queries about plant care, fertilizers, weather conditions, and best farming practices.
 
-Get to know about the disease ✅
-
-Take necessary actions 👍
-
-## Webpage Preview
-
-![image](https://user-images.githubusercontent.com/96369223/207110121-6b0dc821-ebf7-4be2-be8a-df19aae79296.png)
-
-## Disease Prediction
-
-![image](https://user-images.githubusercontent.com/96369223/207110333-46cdf258-7ee8-4ccb-902a-63891785b42e.png)
+This smart integration of AI and conversational technology bridges the gap between technology and agriculture, enabling farmers to make informed decisions quickly. By detecting diseases early and offering instant solutions, the system helps reduce crop loss, improve yield quality, and promote sustainable farming practices. Overall, it represents a significant step toward modern, AI-driven precision agriculture that supports farmers through automation and intelligence.

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Review System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: rgb(5, 47, 5);
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgb(5, 47, 5);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input, textarea, button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: rgb(5, 47, 5);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .review-list {
+      margin-top: 30px;
+    }
+    .review-item {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+    .review-item img {
+      max-width: 100%;
+      max-height: 200px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Farmer Review System</h1>
+  </header>
+  <div class="container">
+    <h2>Submit Your Review</h2>
+    <form id="reviewForm">
+      <label>
+        Name:
+        <input type="text" id="farmerName" placeholder="Your Name" required>
+      </label>
+      <label>
+        Feedback:
+        <textarea id="farmerFeedback" placeholder="Your Feedback" rows="4" required></textarea>
+      </label>
+      <label>
+        Suggestions or Fertilizer Recommendations:
+        <textarea id="farmerSuggestions" placeholder="Suggestions" rows="4"></textarea>
+      </label>
+      <label>
+        Upload Image:
+        <input type="file" id="farmImage" accept="image/*">
+      </label>
+      <button type="submit">Submit Review</button>
+    </form>
+    <div class="review-list" id="reviewList">
+      <h2>Reviews</h2>
+    </div>
+  </div>
+
+  <script>
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewList = document.getElementById('reviewList');
+
+    reviewForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Collect data from the form
+      const name = document.getElementById('farmerName').value;
+      const feedback = document.getElementById('farmerFeedback').value;
+      const suggestions = document.getElementById('farmerSuggestions').value;
+      const imageInput = document.getElementById('farmImage');
+      let imageURL = '';
+
+      if (imageInput.files && imageInput.files[0]) {
+        const fileReader = new FileReader();
+        fileReader.onload = function (e) {
+          imageURL = e.target.result;
+          addReview(name, feedback, suggestions, imageURL);
+        };
+        fileReader.readAsDataURL(imageInput.files[0]);
+      } else {
+        addReview(name, feedback, suggestions, imageURL);
+      }
+
+      // Clear the form
+      reviewForm.reset();
+    });
+
+    function addReview(name, feedback, suggestions, imageURL) {
+      // Create a new review item
+      const reviewItem = document.createElement('div');
+      reviewItem.classList.add('review-item');
+
+      reviewItem.innerHTML = `
+        <h3>${name}</h3>
+        <p><strong>Feedback:</strong> ${feedback}</p>
+        <p><strong>Suggestions:</strong> ${suggestions || 'No suggestions provided.'}</p>
+        ${imageURL ? `<img src="${imageURL}" alt="Farm Image">` : ''}
+      `;
+
+      // Append the review to the list
+      reviewList.appendChild(reviewItem);
+    }
+  </script>
+</body>
+</html>

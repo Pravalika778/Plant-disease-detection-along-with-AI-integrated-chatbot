@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prevention for Plant Diseases</title>
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: rgb(5, 47, 5);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            width: 70%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            background-color: rgb(5, 47, 5);
+            color: white;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .search-bar button:hover {
+            background-color: #45a049;
+        }
+
+        .info-section {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgb(5, 47, 5);
+        }
+
+        .info-section h2 {
+            margin-top: 0;
+            color: rgb(5, 47, 5);
+        }
+
+        .info-section p {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .fertilizer-image {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .fertilizer-image img {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1em;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Prevention for Plant Diseases </h1>
+    </header>
+    <div class="container">
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="disease-input" placeholder="Enter disease name (e.g., Tomato Early Blight)">
+            <button id="search-btn">Search</button>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="error-message"></div>
+
+        <!-- Information Section -->
+        <div class="info-section" id="info-section">
+            <h2>Information</h2>
+            <p>Please type a plant disease name and click search to see details.</p>
+        </div>
+
+      
+    </div>
+
+    <script>
+        // Disease Data
+        const diseaseData = {
+            "pepper bell bacterial spot": {
+                description: "Bacterial spot causes dark, water-soaked spots on leaves.",
+                causes: "Caused by Xanthomonas bacteria.",
+                prevention: "Avoid overhead watering and use disease-free seeds.",
+                fertilizer: "Use balanced NPK fertilizers.",
+                
+            },
+            "pepper bell healthy": {
+    description: "Healthy pepper plants exhibit vibrant green leaves, strong stems, and consistent growth.",
+    causes: "Healthy plants thrive when provided with proper care, optimal sunlight, and sufficient watering.",
+    prevention: "Ensure well-draining soil, adequate spacing, and regular monitoring to prevent pests and diseases.",
+    fertilizer: "Use an all-purpose balanced NPK fertilizer (10-10-10) to maintain health and promote fruiting.",
+    
+},
+
+            "potato early blight": {
+                description: "Early blight causes brown spots with concentric rings on leaves.",
+                causes: "Caused by the fungus Alternaria solani.",
+                prevention: "Crop rotation and fungicide application.",
+                fertilizer: "Apply potassium-rich fertilizers.",
+               
+            },
+            "potato late blight": {
+                description: "Late blight causes water-soaked lesions on leaves and tubers.",
+                causes: "Caused by the pathogen Phytophthora infestans.",
+                prevention: "Use resistant varieties and fungicides.",
+                fertilizer: "Avoid excessive nitrogen; balance with potassium and phosphorus.",
+                
+            },
+            "tomato bacterial spot": {
+                description: "Bacterial spot causes small, water-soaked lesions on leaves and fruits.",
+                causes: "Caused by Xanthomonas species.",
+                prevention: "Avoid overhead watering and use copper-based fungicides.",
+                fertilizer: "Use a balanced NPK fertilizer.",
+               
+            },
+            "tomato early blight": {
+                description: "Early blight causes dark, concentric ring spots on leaves.",
+                causes: "Caused by Alternaria solani fungus.",
+                prevention: "Use crop rotation and apply fungicides.",
+                fertilizer: "Use potassium-rich fertilizers.",
+               
+            },
+            "tomato late blight": {
+                description: "Late blight causes dark, water-soaked spots on leaves and stems.",
+                causes: "Caused by Phytophthora infestans.",
+                prevention: "Avoid overhead watering and apply fungicides.",
+                fertilizer: "Use a balanced fertilizer and avoid excess nitrogen.",
+                
+            }
+        };
+
+        // DOM Elements
+        const diseaseInput = document.getElementById("disease-input");
+        const searchBtn = document.getElementById("search-btn");
+        const infoSection = document.getElementById("info-section");
+        const fertilizerImage = document.getElementById("fertilizer-image");
+        const errorMessage = document.getElementById("error-message");
+
+        // Search Functionality
+        searchBtn.addEventListener("click", () => {
+            const userInput = diseaseInput.value.trim().toLowerCase();
+            if (userInput) {
+                if (diseaseData[userInput]) {
+                    const data = diseaseData[userInput];
+                    infoSection.innerHTML = `
+                        <h2>${userInput.replace(/_/g, " ").toUpperCase()}</h2>
+                        <p><strong>Description:</strong> ${data.description}</p>
+                        <p><strong>Causes:</strong> ${data.causes}</p>
+                        <p><strong>Prevention:</strong> ${data.prevention}</p>
+                        <p><strong>Recommended Fertilizer:</strong> ${data.fertilizer}</p>
+                    `;
+                    fertilizerImage.innerHTML = `<img src="${data.image}" alt="Fertilizer Image">`;
+                    errorMessage.textContent = ""; // Clear any previous error
+                } else {
+                    errorMessage.textContent = "Disease not found. Please check your input and try again.";
+                    infoSection.innerHTML = "<h2>Information</h2><p>Please type a plant disease name and click search to see details.</p>";
+                    fertilizerImage.innerHTML = "";
+                }
+            } else {
+                errorMessage.textContent = "Please enter a disease name.";
+            }
+        });
+    </script>
+</body>
+</html>
